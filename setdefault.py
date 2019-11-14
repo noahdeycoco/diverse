@@ -6,7 +6,7 @@ import pprint
 message = 'It was a nice cold day in April, and the clocks were' +\
           'strinking thirteen'
 # count: dict[str, int] = {}
-count = {}
+count = {}  # Need type annotation for 'count' (hint: "count: Dict[<type>, <type>] = ...")
 
 for i in message:
     count.setdefault(i, 0)
