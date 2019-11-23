@@ -3,8 +3,9 @@
 
 import pyperclip
 import re
+import sys
 
-phoneRegex = re.compile(r'''( 
+phoneRegex = re.compile(r'''(
 (\d{3}|\(\d{3}\))?              # area code
 (\s|-|\.)?                      # separator
 (\d{3})                         # first 3 digits
@@ -13,20 +14,49 @@ phoneRegex = re.compile(r'''(
 (\s*(ext|x|ext.)\s*(\d{2,5}))?  # extension
 )''', re.VERBOSE)
 
-
 frenchPhoneRegex = re.compile(r'''(
-((+)?\d{2})  # area code
-\d{}
-6 23 84 73 89
-09 83 23 32 32
+(\+\d{2}(\s|-|\.))? # extension code
+(\d{1,2})
+(\s|-|\.)?
+(\d{2})
+(\s|-|\.)?
+(\d{2})
+(\s|-|\.)?
+(\d{2})
+(\s|-|\.)?
+(\d{2})
 )''', re.VERBOSE)
 
-# TODO: Create email regex.
+# mailRegex_old = re.compile(r'\w+@\S*\.\w+')  # Need to forbid special carac
+mailRegex = re.compile(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$')
 
-mailRegex = re.compile(r'\w+@.*\.\w+')
-# test
-# mailSentence = mailRegex.search('fsq bonjour ds2dq@dq34s. com dqs')
-# print(mailSentence.group())
 
-# TODO: Find matches in clipboard text. 
-# TODO: Copy results to the clipboard.
+def find_email(source):
+    # print(str(type(source)) + ': ' + str(source))
+    findall_results = mailRegex.findall(source)
+    # print(findall_results)
+    try:
+        if len(findall_results) == 1:
+            print('One email has been found and has been copied to clipboard:')
+            # print(''.join(findall_results))
+            pyperclip.copy(''.join(findall_results))
+        elif findall_results == []:
+            print('No email address has been found from the source.')
+        else:
+            # print(findall_results)
+            print('Email adresses has been found and copied to clipboard.')
+            pyperclip.copy('\t'.join(findall_results))
+    except Exception:
+        print('An error occured: ' + str(Exception))
+
+
+def programm_exit():
+    try:
+        sys.exit('Programm exit.')
+    except Exception:
+        print('An error occured when trying to exit: ' + str(Exception))
+
+
+if __name__ == '__main__':
+    find_email(pyperclip.paste())
+    programm_exit()
