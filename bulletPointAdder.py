@@ -7,7 +7,7 @@ import pyperclip
 
 def intro():
     print(' BULLET POINT ADDER '.center(45, '*'))
-    print(' What was your clipboard is now a list !')
+    print('What was in  your clipboard is now a list !')
     # print('\nEnter a key to continue. \nEnter "q" to exit.')
     # user_choise = input()
     # try:
