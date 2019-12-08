@@ -2,7 +2,7 @@
 # randomQuizGenerator.py - Creates quizzes with questions and answers in
 # random order, along with the answer key.
 
-# import random
+import random
 import os
 
 # The quiz data. Keys are states and values are their capitals.
@@ -79,14 +79,43 @@ def create_quiz():
         for quizNum in range(35):
             # TODO: Create the quiz and answer key files.
             quizFile = open('quiz/capitalsquiz%s.txt' % (quizNum + 1), 'w')
-            answerKeyFile = open('quiz/capitalsquiz_answers%s.txt' %
-                                (quizNum + 1), 'w')
+            # answerKeyFile = open('quiz/capitalsquiz_answers%s.txt' %
+            #                     (quizNum + 1), 'w')
             # TODO: Write out the header for the quiz.
             quizFile.write('Name:\n\nDate:\n\nPeriod:\n\n')
             quizFile.write((' ' * 20) + 'State Capitals Quiz (Form %s)' %
                            (quizNum + 1))
             quizFile.write('\n\n')
             # TODO: Shuffle the order of the states.
+            states = list(capitals.keys()) 
+            random.shuffle(states)
+
+        print(str(len([name for name in os.listdir('quiz/') if
+              os.path.isdir('quiz/')])) + ' files has been created.')
+        return states
+    except Exception:
+        print('An error occured: ' + str(Exception))
+
+
+def answer_quiz():
+    try:
+        # Loop through all 50 states, making a question for each.
+        for questionNum in range(50):
+            # Get right and wrong answers.
+            correctAnswer = capitals[states[questionNum]]
+            wrongAnswers = list(capitals.values())
+            del wrongAnswers[wrongAnswers.index(correctAnswer)]
+            wrongAnswers = random.sample(wrongAnswers, 3)
+            answerOptions = wrongAnswers + [correctAnswer]
+            random.shuffle(answerOptions)
+        # TODO: Write the question and answer options to the quiz file.
+            correctCapital = [key for key, value in capitals.items() 
+                              if value == correctAnswer]
+            print('What is the capital of ' + ''.join(correctCapital) +
+                  ' between these answers : ' +
+                  str(', '.join(answerOptions) + ' ?'))
+        # TODO: Write the answer key to a file.
+            
     except Exception:
         print('An error occured: ' + str(Exception))
 
@@ -94,3 +123,5 @@ def create_quiz():
 if __name__ == '__main__':
     create_dir()
     create_quiz()
+    states = create_quiz()
+    answer_quiz()
