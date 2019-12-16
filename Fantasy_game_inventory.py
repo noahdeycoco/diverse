@@ -19,11 +19,11 @@ def addToInventory(inventory, addedItems):
     for i in addedItems:
         inventory.setdefault(i, 0)
         inventory[i] += 1
-    print(str(len(addedItems)) + ' has been added.')
+    print(str(len(addedItems)) + ' items has been added.')
     return inventory
 
 
 if __name__ == '__main__':
-    # displayInventory(stuff)
+    displayInventory(stuff)
     inv = addToInventory(inv, dragonLoot)
     displayInventory(inv)

@@ -1,4 +1,3 @@
-#! python3
 # randomQuizGenerator.py - Creates quizzes with questions and answers in
 # random order, along with the answer key.
 
@@ -79,15 +78,15 @@ def create_quiz():
         for quizNum in range(35):
             # TODO: Create the quiz and answer key files.
             quizFile = open('quiz/capitalsquiz%s.txt' % (quizNum + 1), 'w')
-            # answerKeyFile = open('quiz/capitalsquiz_answers%s.txt' %
-            #                     (quizNum + 1), 'w')
+            answerKeyFile = open('quiz/capitalsquiz_answers%s.txt' %
+                                 (quizNum + 1), 'w')
             # TODO: Write out the header for the quiz.
             quizFile.write('Name:\n\nDate:\n\nPeriod:\n\n')
             quizFile.write((' ' * 20) + 'State Capitals Quiz (Form %s)' %
                            (quizNum + 1))
             quizFile.write('\n\n')
             # TODO: Shuffle the order of the states.
-            states = list(capitals.keys()) 
+            states = list(capitals.keys())
             random.shuffle(states)
 
         print(str(len([name for name in os.listdir('quiz/') if
@@ -100,7 +99,7 @@ def create_quiz():
 def answer_quiz():
     try:
         # Loop through all 50 states, making a question for each.
-        for questionNum in range(50):
+        for questionNum in range(1, 50):
             # Get right and wrong answers.
             correctAnswer = capitals[states[questionNum]]
             wrongAnswers = list(capitals.values())
@@ -108,20 +107,29 @@ def answer_quiz():
             wrongAnswers = random.sample(wrongAnswers, 3)
             answerOptions = wrongAnswers + [correctAnswer]
             random.shuffle(answerOptions)
-        # TODO: Write the question and answer options to the quiz file.
-            correctCapital = [key for key, value in capitals.items() 
+            # Question and answer options to the quiz file.
+            correctCapital = [key for key, value in capitals.items()
                               if value == correctAnswer]
-            print('What is the capital of ' + ''.join(correctCapital) +
-                  ' between these answers : ' +
-                  str(', '.join(answerOptions) + ' ?'))
-        # TODO: Write the answer key to a file.
-            
+            for quizNum in range(35):
+                quizFile = open('quiz/capitalsquiz%s.txt' % (quizNum + 1), 'a')
+                answerKeyFile = open('quiz/capitalsquiz_answers%s.txt' %
+                                     (quizNum + 1), 'a')
+                quizFile.write('\n\n%s. What is the capital ' % (questionNum) +
+                               ' of %s between ' % (''.join(correctCapital)) +
+                               ' these answers : \n')
+                for i in range(4):
+                    quizFile.write('\t %s. ' % ('ABCD'[i]) +
+                                   '%s' % (answerOptions[i]))
+
+                answerKeyFile.write('%s. %s\n' % (questionNum, 'ABCD'[
+                                    answerOptions.index(correctAnswer)]))
+        print('All questions has been written as well as the answers.')
     except Exception:
         print('An error occured: ' + str(Exception))
 
 
 if __name__ == '__main__':
     create_dir()
-    create_quiz()
+    # create_quiz()
     states = create_quiz()
     answer_quiz()
