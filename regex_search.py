@@ -1,12 +1,13 @@
+import glob
+import random
+import os
+import re
+
 """Regex Search
 Write a program that opens all .txt files in a folder and searches for any line
 that matches a user-supplied regular expression. The results should be printed
 to the screen.
 """
-
-import random
-import os
-import re
 
 random_file_text = """Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minimveniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."""
 
@@ -45,11 +46,22 @@ def write_files():
     except Exception:
         print('An error occured: ' + str(Exception))
 
+
 def search_regex():
-    for _ range():
+    mypath ='data/'
+    lorem_regex = re.compile(r'dolore')
+    random_text_files = [f for f in os.listdir(mypath) if os.path.isfile(os.path.join(mypath, f))]
+    print(random_text_files)
+    for i in range(4):
+        random_file_text_1 = open('data' + os.sep + 'random_text_%s.txt' % i, 'r')
+        random_file_read = random_file_text_1.readlines()
+
+        regex_result = lorem_regex.findall(str(random_file_read))
+        print('random_text_%s.txt : ' % i + str(regex_result))
 
 
 if __name__ == '__main__':
     write_initial_file()
     create_data(random_file_text)
     write_files()
+    search_regex()
