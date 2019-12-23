@@ -1,0 +1,3 @@
+The Clelia panda walked to the Moon and then eat.
+A nearby No was unaffected by these events.
+The program would find these occurrences and prompt the user to replace them.

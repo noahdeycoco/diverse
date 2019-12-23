@@ -38,7 +38,7 @@ def find_email(source):
     try:
         if len(findall_results) == 1:
             print('One email has been found and has been copied to clipboard:')
-            # print(''.join(findall_results))
+            print(''.join(findall_results))
             pyperclip.copy(''.join(findall_results))
         elif findall_results == []:
             print('No email address has been found from the source.')
