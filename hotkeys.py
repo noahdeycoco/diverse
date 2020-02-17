@@ -8,47 +8,69 @@ import sys
 
 def intro(): # ajouter un try
     print(' HOTKEYS '.center(45, '*'))
-    print('(D)ata list \n(M)ultiplier effect')
-    # user_input = input('>')
-    user_input = 'D'
-    if user_input.lower() == 'd':
-        print('DEBUTANNE+FINANNEE+TIMES')
-        print('DEBUTANNE')
-        # debutannee_input = input('INPUT YEAR (YYYY)')
-        # finannee_output = input('OUTPUT YEAR (YYYY)')
-        # times_input = input('TIMES (int)')
-        debutannee_input = 2000
-        finannee_output=2003
-        times_input = 3
-        for i in range(times_input):
-            s='-'
-            debutannee= "31-12-"+str(debutannee_input)
-            print(debutannee)
-        for i in range(times_input):
-            s='-'
-            finannee= "31-12-"+str(finannee_output)
-            print(finannee)
-        
-        print('LISTE ANNEE')
-        clipboard = pyperclip.paste()
-        list_transformed = []
-        [list_transformed.append('- ' + i) for i in clipboard.splitlines()] 
-
-
-
-    elif user_input.lower() == 'M':
-        print(4)
+    print('(L)ines grouped \n(C)olumns group')
+    print('(M)ultiplier effect \n(E)nding year')
+    user_input = input("Please select ")
+    if user_input.lower() == 'l':
+        group_columns_values_for_each_line()
+    elif user_input.lower() == 'c':
+        group_columns_values_for_each_columns()
+    elif user_input.lower() == 'm':
+        nb = input('How many times?')
+        multiplier_effect(nb)
+    elif user_input.lower() == 'e':
+        nb = input('How many times?')
+        ending_year(nb)
     else:
         print('exit')
         sys.exit()
 
-def list_clipboarded():
+
+def group_columns_values_for_each_line():
+    print(' GROUP COLUMNS VALUES FOR EACH LINE '.center(45, '*'))
     clipboard = pyperclip.paste()
+    print(clipboard)
+    data = [line.split('\t') for line in clipboard.splitlines()]
+    master_list = []
+
+    for i in range(len(data[0])):
+        master_list.append((list(zip(*data))[i]))
+
+    flat_list = [item for sublist in master_list for item in sublist]
+    print(master_list)
+    return pyperclip.copy('\n'.join(flat_list))
+    
+
+def group_columns_values_for_each_columns():
+    print(' GROUP COLUMNS VALUES FOR EACH COLUMNS '.center(45, '*'))
+    clipboard = pyperclip.paste()
+    print(clipboard)
+    data = [line.split('\t') for line in clipboard.splitlines()]
+    flat_list = [item for sublist in data for item in sublist]
+    print(flat_list)
+    return pyperclip.copy('\n'.join(flat_list))
+
+def multiplier_effect(nb):
+    print(' MULTIPLIER EFFECT '.center(45, '*'))
+    clipboard = pyperclip.paste()
+    list_transformed = clipboard.splitlines()
+    list_transformed = list_transformed*int(nb)
+    list_transformed = '\n'.join(list_transformed)
+    print(list_transformed)
+    return pyperclip.copy(list_transformed)
+
+def ending_year(nb):
+    print(' ENDING YEAR '.center(45, '*'))
+    clipboard = pyperclip.paste()
+    print(clipboard)
     list_transformed = []
-    [list_transformed.append('- ' + i) for i in clipboard.splitlines()]
-    return '\n'.join(list_transformed)
+    [list_transformed.insert(0, str("31-12-"+i)) for i in clipboard.splitlines()]
+    list_transformed = list_transformed*int(nb)
+    list_transformed.sort()
+    list_transformed = '\n'.join(list_transformed)
+    print(list_transformed)
+    return pyperclip.copy(list_transformed)
 
 
 if __name__ == '__main__':
     intro()
-    # pyperclip.copy(list_clipboarded())
