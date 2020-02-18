@@ -75,6 +75,7 @@ def ending_year(nb):
 
 def template():
     print(' TEMPLATE '.center(45, '*'))
+    print('codeIndicateur	dateIndicateur			localisation	geo	unite	source')
     return pyperclip.copy('codeIndicateur	dateIndicateur			localisation	geo	unite	source')
 
 if __name__ == '__main__':
