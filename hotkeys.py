@@ -9,7 +9,7 @@ import sys
 def intro(): # ajouter un try
     print(' HOTKEYS '.center(45, '*'))
     print('(L)ines grouped \n(C)olumns group')
-    print('(M)ultiplier effect \n(E)nding year')
+    print('(M)ultiplier effect \n(E)nding year\n(T)emplate')
     user_input = input("Please select ")
     if user_input.lower() == 'l':
         group_columns_values_for_each_line()
@@ -21,6 +21,8 @@ def intro(): # ajouter un try
     elif user_input.lower() == 'e':
         nb = input('How many times?')
         ending_year(nb)
+    elif user_input.lower() == 't':
+        template()
     else:
         print('exit')
         sys.exit()
@@ -71,6 +73,9 @@ def ending_year(nb):
     print(list_transformed)
     return pyperclip.copy(list_transformed)
 
+def template():
+    print(' TEMPLATE '.center(45, '*'))
+    return pyperclip.copy('codeIndicateur	dateIndicateur			localisation	geo	unite	source')
 
 if __name__ == '__main__':
     intro()
