@@ -1,7 +1,7 @@
 {
     "editor.fontFamily": "'Fira Code', 'Arial', 'Droid Sans Mono', 'Courier New', monospace, 'Droid Sans Fallback'",
     "editor.fontLigatures": true,
-    "window.zoomLevel": 2,
+    "window.zoomLevel": 0,
     "editor.mouseWheelZoom": true,
     "editor.fontSize": 12,
     "editor.rulers": [
@@ -27,7 +27,7 @@
     "python.testing.pytestEnabled": false,
     "python.linting.pylintEnabled": false,
     "python.formatting.provider": "black",
-    "python.pythonPath": "C:\\Users\\noesa\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe",
+    "python.pythonPath": "/Users/noesautel/miniconda3/bin/python",
     "python.testing.promptToConfigure": false,
     "python.testing.unittestEnabled": false,
     "python.testing.nosetestsEnabled": false,
