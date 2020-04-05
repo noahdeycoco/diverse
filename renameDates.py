@@ -56,6 +56,7 @@ def delete_files():
 
 if __name__ == "__main__":
     try:
+        pass
         write_date_files()
         # change_datetime()
         delete_files()
