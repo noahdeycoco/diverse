@@ -25,3 +25,6 @@ else:
     print('Downloading image %s...' % (comicUrl)) 
     res = requests.get(comicUrl) 
     res.raise_for_status()
+
+
+    
