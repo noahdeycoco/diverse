@@ -11,11 +11,10 @@ number = config.get('twilio_phoneNumber')
 
 client = Client(account_sid, auth_token)
 
-
 message = client.messages.create(
          body='Coucou my love',
          from_=number,
-         to=''
+         to='+33623740679'
          )
 
 print(message.sid)
